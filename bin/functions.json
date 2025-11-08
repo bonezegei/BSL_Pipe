@@ -1,0 +1,3 @@
+{
+ "pipe_open", "pipe_getline", "pipe_close"
+}
