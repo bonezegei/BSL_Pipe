@@ -1,0 +1,29 @@
+//Include the pipe library
+include("lib/pipe.bzg");
+
+//pipe_open(<executable>) 
+var pipe1 = pipe_open("bonezegei --info");
+var pipe2 = pipe_open("bonezegei -v");
+
+print("\nReading from Pipe1...");  // pipe_getline(<the pipe>)
+var line = pipe_getline(pipe1);    // Reads the output stream of the executable
+while (line != 0) {
+
+    // This code removes the extra new line
+    var size = sizeof(line);      
+    line[size - 1] = " ";     
+
+    print("Pipe1: " + line);
+    line = pipe_getline(pipe1);
+}
+
+print("\nReading from Pipe2...");
+var line = pipe_getline(pipe2);
+while (line != 0) {
+
+    var size = sizeof(line);
+    line[size - 1] = " "; 
+
+    print("Pipe2: " + line);
+    line = pipe_getline(pipe2);
+}
