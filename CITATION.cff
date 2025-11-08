@@ -1,0 +1,37 @@
+abstract: "<h3>Bonezegei Scripting Language Library: Pipe</h3>\n<p>The BSL_pipe library\
+  \ provides an essential and intuitive mechanism for Inter-Process Communication\
+  \ (IPC) within the Bonezegei Scripting Language environment. It introduces the concept\
+  \ of a unidirectional data channel (a pipe), allowing the output stream of one process\
+  \ or function to be seamlessly channeled as the input stream to another, executing\
+  \ processes in a sequential, stream-based manner.</p>\n<h3>Install using Package\
+  \ Installer</h3>\n<p>&lt;strong&gt;Note&lt;/strong&gt; Go to the directory where\
+  \ the .bzg script is located</p>\n<ul>\n<li>Windows cmd\n<pre><code>bzg install\
+  \ pipe\n</code></pre>\n</li>\n<li>Linux Terminal\n<pre><code>sudo bzg install pipe\n\
+  </code></pre>\n</li>\n</ul>\n<h3>Usage</h3>\n<p>This code show how to use the pipe\
+  \ functions</p>\n<pre><code>//Include the pipe library\ninclude(\"lib/pipe.bzg\"\
+  );\n\n//pipe_open(&lt;executable&gt;) \nvar pipe1 = pipe_open(\"bonezegei --info\"\
+  );\nvar pipe2 = pipe_open(\"bonezegei -v\");\n\nprint(\"\\nReading from Pipe1...\"\
+  );  // pipe_getline(&lt;the pipe&gt;)\nvar line = pipe_getline(pipe1);    // Reads\
+  \ the output stream of the executable\nwhile (line != 0) {\n\n    // This code removes\
+  \ the extra new line\n    var size = sizeof(line);      \n    line[size - 1] = \"\
+  \ \";     \n    \n    print(\"Pipe1: \" + line);\n    line = pipe_getline(pipe1);\n\
+  }\n\nprint(\"\\nReading from Pipe2...\");\nvar line = pipe_getline(pipe2);\nwhile\
+  \ (line != 0) {\n\n    var size = sizeof(line);\n    line[size - 1] = \" \"; \n\n\
+  \    print(\"Pipe2: \" + line);\n    line = pipe_getline(pipe2);\n}\n\n</code></pre>"
+authors:
+- family-names: Batutay
+  given-names: Jofel
+  orcid: 0009-0007-1467-1947
+cff-version: 1.2.0
+date-released: '2025-11-08'
+doi: 10.5281/zenodo.17559878
+identifiers:
+- type: swh
+  value: swh:1:dir:6ad0fc4f6b3e84996ec19c15bc798f8788a31087;origin=https://doi.org/10.5281/zenodo.17559878;visit=swh:1:snp:b234d51ab0f8f19ce19db8df12503c8311b8091b;anchor=swh:1:rel:646965e9ebcd003ac6018d1ab45dbce67ddec495;path=bonezegei-BSL_Pipe-284e56c
+license:
+- mit
+message: If you use this software, please cite it using the metadata from this file.
+repository-code: https://github.com/bonezegei/BSL_Pipe/tree/v1.0.0
+title: 'Bonezegei Scripting Language Library: Pipe'
+type: software
+version: 
