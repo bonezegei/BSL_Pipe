@@ -27,3 +27,5 @@ while (line != 0) {
     print("Pipe2: " + line);
     line = pipe_getline(pipe2);
 }
+
+print("XM25");
