@@ -31,5 +31,21 @@ while (line1 != 0) {
   line1 = pipe1.getline();
 }
 
+// 4. Read and process stream output from Pipe 1
+print("\n--- Reading from Pipe 1 ---");
+var line2 = pipe2.getline();
+while (line2 != 0) {
+  // Trim trailing newline if needed
+  var size = sizeof(line2);
+  
+  if (size > 0) {
+    line2[size - 1] = " "; // strip the newline character
+  }
+
+  print("[Pipe 2 Output]: " + line2);
+  line2 = pipe2.getline();
+}
+
 // Close the first pipe stream and free its internal handle
 pipe1.close();
+pipe2.close();
