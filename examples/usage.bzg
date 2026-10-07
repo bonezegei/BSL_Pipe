@@ -20,16 +20,15 @@ print("Failed to open one or more pipes.");
 print("\n--- Reading from Pipe 1 ---");
 var line1 = pipe1.getline();
 while (line1 != 0) {
-// Trim trailing newline if needed
-var size = sizeof(line1);
+  // Trim trailing newline if needed
+  var size = sizeof(line1);
+  
+  if (size > 0) {
+    line1[size - 1] = " "; // strip the newline character
+  }
 
-if (size > 0) {
-line1[size - 1] = " "; // strip the newline character
-}
-
-print("[Pipe 1 Output]: " + line1);
-line1 = pipe1.getline();
-
+  print("[Pipe 1 Output]: " + line1);
+  line1 = pipe1.getline();
 }
 
 // Close the first pipe stream and free its internal handle
