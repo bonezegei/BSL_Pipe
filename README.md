@@ -20,33 +20,38 @@ This code show how to use the pipe functions
 //Include the pipe library
 include("lib/pipe.bzg");
 
-//pipe_open(<executable>) 
-var pipe1 = pipe_open("bonezegei --info");
-var pipe2 = pipe_open("bonezegei -v");
+print("--- Initializing Pipes ---");
 
-print("\nReading from Pipe1...");  // pipe_getline(<the pipe>)
-var line = pipe_getline(pipe1);    // Reads the output stream of the executable
-while (line != 0) {
+// 2. Instantiate individual, isolated pipe objects using the factory constructor
+var pipe1 = pipe();
+var pipe2 = pipe();
 
-    // This code removes the extra new line
-    var size = sizeof(line);      
-    line[size - 1] = " ";     
+// 3. Open processes/commands in read-only mode
+// (These run concurrently and keep their handles isolated internally)
+var status1 = pipe1.open("echo Hello from Pipe 1!");
+var status2 = pipe2.open("bonezegei -v");
 
-    print("Pipe1: " + line);
-    line = pipe_getline(pipe1);
+if (status1 == 0 || status2 == 0) {
+print("Failed to open one or more pipes.");
 }
 
-print("\nReading from Pipe2...");
-var line = pipe_getline(pipe2);
-while (line != 0) {
+// 4. Read and process stream output from Pipe 1
+print("\n--- Reading from Pipe 1 ---");
+var line1 = pipe1.getline();
+while (line1 != 0) {
+  // Trim trailing newline if needed
+  var size = sizeof(line1);
+  
+  if (size > 0) {
+    line1[size - 1] = " "; // strip the newline character
+  }
 
-    var size = sizeof(line);
-    line[size - 1] = " "; 
-
-    print("Pipe2: " + line);
-    line = pipe_getline(pipe2);
+  print("[Pipe 1 Output]: " + line1);
+  line1 = pipe1.getline();
 }
 
+// Close the first pipe stream and free its internal handle
+pipe1.close();
 ```
 The example demonstrates how to use pipe_open and pipe_getline from the Bonezegei
  Scripting Language Pipe library to perform inter-process communication by capturing the
