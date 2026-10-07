@@ -1,1 +1,28 @@
-
+{
+  "name": "Pipe Library",
+  "version": "1.1.0",
+  "functions": {
+    "pipe": {
+      "info": "Creates a new pipe instance",
+      "params": "",
+      "req_params": 0,
+      "methods": {
+        "open": {
+          "info": "Creates a new pipe instance",
+          "params": "terminal_command",
+          "req_params": 1
+        },
+        "close": {
+          "info": "Closes the pipe instance",
+          "params": "",
+          "req_params": 0
+        },
+        "getline": {
+          "info": "Reads a line from the pipe",
+          "params": "",
+          "req_params": 0
+        }
+      }
+    }
+  }
+}
